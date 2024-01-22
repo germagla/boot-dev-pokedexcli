@@ -52,6 +52,7 @@ var funcMap = map[string]func(*config, ...string) error{
 	"explore": exploreCommand,
 	"catch":   catchCommand,
 	"inspect": inspectCommand,
+	"pokedex": pokedexCommand,
 }
 
 func configCommand(c *config, args ...string) error {

@@ -18,4 +18,6 @@ var helpMap = map[string]string{
 		"This command will print an error if you try to go back before the first 20 location areas.",
 	"explore [area]":  "Displays the names of the pokemon found in the current area. ",
 	"catch [pokemon]": "Attempts to catch the specified pokemon. If successful, the pokemon will be added to your pokedex.",
+	"inspect [name]":  "Displays the stats of the specified pokemon.",
+	"pokedex":         "Displays the names of all pokemon in your pokedex.",
 }
