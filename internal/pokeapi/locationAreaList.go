@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-var LocationAreaEndpoint = "https://pokeapi.co/api/v2/location-area/"
+const LocationAreaEndpoint = "https://pokeapi.co/api/v2/location-area/"
 
 type LocationAreaList struct {
 	Count    int     `json:"count"`

@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"github.com/germagla/boot-dev-pokedexcli/internal/cache"
+	"github.com/germagla/boot-dev-pokedexcli/internal/pokeapi"
 	"os"
 	"strings"
 	"time"
@@ -72,4 +73,5 @@ type config struct {
 	next     *string
 	previous *string
 	cache    cache.Cache
+	pokedex  []pokeapi.Pokemon
 }

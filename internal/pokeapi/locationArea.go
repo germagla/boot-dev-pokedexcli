@@ -6,6 +6,7 @@ import (
 	"net/http"
 )
 
+// const LocationAreaEndpoint = "https://pokeapi.co/api/v2/location-area/"
 type LocationArea struct {
 	Id                   int    `json:"id"`
 	Name                 string `json:"name"`
@@ -61,18 +62,21 @@ type LocationArea struct {
 
 func GetLocationArea(name string) (LocationArea, error) {
 	var locationAreaDetails LocationArea
-	baseURL := "https://pokeapi.co/api/v2/location-area/"
+	baseURL := LocationAreaEndpoint
 	url := baseURL + name
 	resp, err := http.Get(url)
 	if err != nil {
 		return locationAreaDetails, err
 	}
-	defer resp.Body.Close()
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return locationAreaDetails, err
 	}
 	err = json.Unmarshal(body, &locationAreaDetails)
+	if err != nil {
+		return locationAreaDetails, err
+	}
+	err = resp.Body.Close()
 	if err != nil {
 		return locationAreaDetails, err
 	}

@@ -99,7 +99,7 @@ func (c *Cache) AddLocationArea(key string, val pokeapi.LocationArea) error {
 	return nil
 }
 func (c *Cache) GetLocationArea(key string) (pokeapi.LocationArea, bool) {
-	baseURL := "https://pokeapi.co/api/v2/location-area/"
+	baseURL := pokeapi.LocationAreaEndpoint
 	key = baseURL + key
 	bytes, ok := c.Get(key)
 	if !ok {
@@ -111,4 +111,27 @@ func (c *Cache) GetLocationArea(key string) (pokeapi.LocationArea, bool) {
 		return pokeapi.LocationArea{}, false
 	}
 	return area, true
+}
+
+func (c *Cache) AddPokemon(key string, val pokeapi.Pokemon) error {
+	bytes, err := json.Marshal(val)
+	if err != nil {
+		return err
+	}
+	c.Add(key, bytes)
+	return nil
+}
+func (c *Cache) GetPokemon(key string) (pokeapi.Pokemon, bool) {
+	baseURL := pokeapi.PokemonEndpoint
+	key = baseURL + key
+	bytes, ok := c.Get(key)
+	if !ok {
+		return pokeapi.Pokemon{}, false
+	}
+	var pokemon pokeapi.Pokemon
+	err := json.Unmarshal(bytes, &pokemon)
+	if err != nil {
+		return pokeapi.Pokemon{}, false
+	}
+	return pokemon, true
 }
