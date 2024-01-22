@@ -19,8 +19,8 @@ type Cache struct {
 	interval time.Duration
 }
 
-func NewCache(interval time.Duration) *Cache {
-	c := &Cache{
+func NewCache(interval time.Duration) Cache {
+	c := Cache{
 		entries:  make(map[string]cacheEntry),
 		interval: interval,
 	}

@@ -12,7 +12,7 @@ import (
 
 func main() {
 	var conf config
-	conf.cache = *cache.NewCache(5 * time.Second)
+	initConfig(&conf)
 	scanner := bufio.NewScanner(os.Stdin)
 	fmt.Println("Welcome to the Pokedex CLI. Enter 'help' for a list of commands.")
 	for {
@@ -29,16 +29,12 @@ func main() {
 			fmt.Println("Error:", err)
 			continue
 		}
-
-		//if input, ok := funcMap[scanner.Text()]; ok {
-		//	//TODO: split input into input and args
-		//	if err := input(&conf); err != nil {
-		//		fmt.Println("Error:", err)
-		//	}
-		//} else {
-		//	fmt.Println("Unknown command.")
-		//}
 	}
+}
+
+func initConfig(c *config) {
+	c.cache = cache.NewCache(5 * time.Second)
+	c.pokedex = make(map[string]pokeapi.Pokemon)
 }
 
 type cliCommand struct {
@@ -55,6 +51,7 @@ var funcMap = map[string]func(*config, ...string) error{
 	"config":  configCommand,
 	"explore": exploreCommand,
 	"catch":   catchCommand,
+	"inspect": inspectCommand,
 }
 
 func configCommand(c *config, args ...string) error {
@@ -73,5 +70,5 @@ type config struct {
 	next     *string
 	previous *string
 	cache    cache.Cache
-	pokedex  []pokeapi.Pokemon
+	pokedex  map[string]pokeapi.Pokemon
 }

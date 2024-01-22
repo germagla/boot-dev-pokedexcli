@@ -46,7 +46,7 @@ func catchPokemon(cfg *config, pokemon pokeapi.Pokemon) {
 }
 
 func addPokemontoPokedex(cfg *config, pkmn pokeapi.Pokemon) {
-	cfg.pokedex = append(cfg.pokedex, pkmn)
+	cfg.pokedex[pkmn.Name] = pkmn
 
 }
 
